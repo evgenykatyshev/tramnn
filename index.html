@@ -1,0 +1,141 @@
+<html>
+
+<head>
+
+<title>Скоростной транспорт Нижнего Новгорода</title>
+
+<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(86851559, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/86851559" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+<script>
+
+function magnify(imgID, zoom) {
+  var img, glass, w, h, bw;
+  img = document.getElementById(imgID);
+
+  /* Create magnifier glass: */
+  glass = document.createElement("DIV");
+  glass.setAttribute("class", "img-magnifier-glass");
+
+  /* Insert magnifier glass: */
+  img.parentElement.insertBefore(glass, img);
+
+  /* Set background properties for the magnifier glass: */
+  window.onload = setSizes;
+  window.onresize = setSizes;
+  
+  function setSizes() {
+    glass.style.backgroundImage = "url('" + img.src + "')";
+    glass.style.backgroundRepeat = "no-repeat";
+    glass.style.backgroundSize = (img.clientWidth * zoom) + "px " + (img.clientWidth * zoom) + "px";
+    bw = 3;
+    w = glass.offsetWidth / 2;
+    h = glass.offsetHeight / 2;
+  }
+
+  /* Execute a function when someone moves the magnifier glass over the image: */
+  glass.addEventListener("mousemove", moveMagnifier);
+  img.addEventListener("mousemove", moveMagnifier);
+
+  /*and also for touch screens:*/
+  glass.addEventListener("touchmove", moveMagnifier);
+  img.addEventListener("touchmove", moveMagnifier);
+  
+  function moveMagnifier(e) {
+    var pos, x, y;
+    /* Prevent any other actions that may occur when moving over the image */
+    e.preventDefault();
+    /* Get the cursor's x and y positions: */
+    pos = getCursorPos(e);
+    x = pos.x;
+    y = pos.y;
+    /* Prevent the magnifier glass from being positioned outside the image: */
+    if (x > img.clientWidth - (w / zoom)) {x = img.clientWidth - (w / zoom);}
+    if (x < w / zoom) {x = w / zoom;}
+    if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+    if (y < h / zoom) {y = h / zoom;}
+    /* Set the position of the magnifier glass: */
+    glass.style.left = (x - w) + "px";
+    glass.style.top = (y - h) + "px";
+    /* Display what the magnifier glass "sees": */
+    glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+  }
+
+  function getCursorPos(e) {
+    var a, x = 0, y = 0;
+    e = e || window.event;
+    /* Get the x and y positions of the image: */
+    a = img.getBoundingClientRect();
+    /* Calculate the cursor's x and y coordinates, relative to the image: */
+    x = e.pageX - a.left;
+    y = e.pageY - a.top;
+    /* Consider any page scrolling: */
+    x = x - window.pageXOffset;
+    y = y - window.pageYOffset;
+    return {x : x, y : y};
+  }
+}
+
+</script>
+
+</head>
+
+<body>
+
+<h1 class="title">Концепт системы скоростного транспорта Нижнего Новгорода «Каркас»</h1>
+
+<nav class="menu">
+  <a href="#scheme" class="menu__item">Схема</a>
+  <a href="#tram" class="menu__item">Трамвай</a>
+  <a href="#metro" class="menu__item">Метро</a>
+  <a href="#train" class="menu__item">Электрички</a>
+  <a href="#bus" class="menu__item">Автобусы</a>
+</nav>
+
+<div class="img-magnifier-container" id="scheme">
+  <img id="myimage" src="rapidtransitnn.png" alt="Схема скоростного транспорта">
+</div>
+
+<script> magnify("myimage", 2); </script>
+
+<section class="section" id="tram">
+<h2 class="subtitle">Трамвай</h2>
+<p>Основа системы «Каркас» —  скоростной трамвай.</p>
+</section>
+
+<section class="section" id="metro">
+<h2 class="subtitle">Метро</h2>
+<p>Метро интегрировано в систему</p>
+</section>
+
+<section class="section" id="train">
+<h2 class="subtitle">Электрички</h2>
+<p>Пригородные электрички</p>
+</section>
+
+<section class="section" id="bus">
+<h2 class="subtitle">Автобусы</h2>
+<p></p>
+</section>
+
+<div id="map">
+  <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa534c7c20a870c3ebc2066c6640ccfbe705f82c65ec670f77f292f3208df8648&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=true"></script>
+  <ul id="map__legend">
+    Остановки:
+    <li class="legend__item"><span class="stop" style="border-color: #1e98ff;"></span> новые</li>
+    <li class="legend__item"><span class="stop" style="border-color: #ff931e;"></span> перемещённые</li>
+    <li class="legend__item"><span class="stop" style="border-color: #b51eff;"></span> переименованные</li>
+    <li class="legend__item"><span class="stop" style="border-color: #ed4543;"></span> ликвидируемые</li>
+  </ul>
+</div>
+
+</body>
+
+</html>
+
